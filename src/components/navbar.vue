@@ -7,7 +7,7 @@
             <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -90px">
-            <router-link to="" class="login__btn">Login</router-link>
+            <a :href="authUrlString" class="login__btn">Login</a>
         </section>
         <section class="login">
             <router-link to="" class="login__btn">Buy Auct Token</router-link>
@@ -15,8 +15,34 @@
     </nav>
 </template>
 <script>
+    import random from '@/helpers/random';
 export default {
-    name: 'AuctoNodeNavbar'
+    name: 'AuctoNodeNavbar',
+    data() {
+        return {
+            authUrlString: '',
+            randomString: '',
+            auth: {
+                basicPath: 'https://client.wavesplatform.com#gateway/auth',
+                referrer: '?r=http:localhost:8080',
+                name: '?n=AuctoNode',
+                iconPath: '?i=https://wavesmania.net/images/aucttoken.png',
+                debug: '?debug=true'
+
+            }
+        }
+    },
+    methods: {
+        generateRandom() {
+            this.randomString = random();
+            this.auth.data = '?d=' + this.randomString;
+            this.authUrlString = `${this.auth.basicPath}${this.auth.referrer}${this.auth.name}${this.auth.data}${this.auth.iconPath}${this.auth.debug}`
+        }
+    },
+    created() {
+        this.generateRandom();
+        console.log(this.randomString);
+    }
 }
 </script>
 <style lang="scss" scoped>

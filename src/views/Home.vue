@@ -94,8 +94,6 @@ export default {
         this.filteredAuctArray = this.auctArray.filter((auct) => {
           return auct.quantity >= 1000000
         })
-
-        console.table(this.filteredAuctArray)
       })
     }
   },
