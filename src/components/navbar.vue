@@ -24,7 +24,7 @@ export default {
             randomString: '',
             auth: {
                 basicPath: 'https://client.wavesplatform.com#gateway/auth',
-                referrer: '?r=http:localhost:8080',
+                referrer: '?r=https://auctonode.herokuapp.com/',
                 name: '?n=AuctoNode',
                 iconPath: '?i=https://wavesmania.net/images/aucttoken.png',
                 debug: '?debug=true'
