@@ -6,7 +6,7 @@
         <section class="search">
             <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
         </section>
-        <section class="login" style="margin-right: -90px">
+        <section class="login" style="margin-right: -60px">
             <a :href="authUrlString" class="login__btn">Login</a>
         </section>
         <section class="login">
@@ -87,4 +87,5 @@ nav {
         font-family: "Segoe UI" sans-serif;
     }
 }
+
 </style>
