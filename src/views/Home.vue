@@ -101,7 +101,7 @@ export default {
         }).sort(function(a, b){return b.quantity-a.quantity})
 
         if (getQueryVariable("a")) {
-          const isAddress = addressExist(this.filteredAuctArray, "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG");
+          const isAddress = addressExist(this.filteredAuctArray, getQueryVariable("a"));
           if (isAddress) {
             this.login();
             localStorage.setItem("userAddress", JSON.stringify(getQueryVariable("a")));
