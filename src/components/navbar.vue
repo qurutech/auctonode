@@ -10,8 +10,11 @@
             <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
             <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
         </section>
+        <section class="login" style="margin-right: -60px">
+            <router-link to="/dashboard" class="login__btn" v-if="isLoggedIn">Dashboard</router-link>
+        </section>
         <section class="login">
-            <router-link to="" class="login__btn">Buy Auct Token</router-link>
+            <router-link to="" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</router-link>
         </section>
     </nav>
 </template>
