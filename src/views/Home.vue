@@ -93,7 +93,7 @@ export default {
 
         this.filteredAuctArray = this.auctArray.filter((auct) => {
           return auct.quantity >= 1000000
-        })
+        }).sort(function(a, b){return b.quantity-a.quantity})
       })
     }
   },

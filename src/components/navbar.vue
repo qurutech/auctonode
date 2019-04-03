@@ -42,6 +42,7 @@ export default {
     created() {
         this.generateRandom();
         console.log(this.randomString);
+        console.log(getQueryVariable("s"))
     }
 }
 </script>
@@ -60,7 +61,7 @@ nav {
     background-color: $primary-color;
     margin-bottom: 0;
     a {
-       color: lighten(#E27B36, 25%);
+        color: lighten(#E27B36, 25%);
         text-decoration: none;
     }
 
