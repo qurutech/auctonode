@@ -273,7 +273,17 @@ export default {
         margin: 2rem auto;
         width: 60%;
         text-align: center;
-
+        animation: bounce 900ms;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        transform-origin: bottom;
       }
+
+      @keyframes bounce {
+        0%   { transform: translateY(0); }
+        50%  { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
+    }
 </style>
 
