@@ -42,7 +42,6 @@ export default {
     created() {
         this.generateRandom();
         console.log(this.randomString);
-        console.log(getQueryVariable("s"))
     }
 }
 </script>

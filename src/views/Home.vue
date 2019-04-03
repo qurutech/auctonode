@@ -31,7 +31,8 @@
           <h2 class="header__title">Quantity</h2>
           <h2 class="header__title">KYI Status</h2>
         </section>
-        <section class="body">
+        <section v-if="filteredAuctArray.length == 0" class="loading">AuctoNode is fetching owners. Please wait..</section>
+        <section class="body" else>
           <section v-for="(auct, index) in filteredAuctArray" :key="index" class="items">
             <section class="item">
               <p class="item__content"><a href="">{{auct.address}}</a></p>
@@ -68,6 +69,7 @@
 <script>
 // @ is an alias to /src
 import AuctoNodeNavbar from "@/components/navbar";
+import getQueryVariable from "@/helpers/getQueryVariable"
 export default {
   name: 'home',
   data() {
@@ -102,6 +104,7 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
+    console.log(getQueryVariable("a"))
   }
 }
 </script>
@@ -204,7 +207,7 @@ export default {
       }
     }
 
-    .kyi-status, .vote {
+    .kyi-status, .vote, .loading {
       background-color: lighten(#E27B36, 25%);
       padding: 1rem 2rem;
       color: $secondary-color;
@@ -240,7 +243,7 @@ export default {
           margin-right: 1rem !important;
           a {
             text-decoration: none;
-      color: lighten(#E27B36, 25%); 
+            color: lighten(#E27B36, 25%); 
 
           }
           margin: 0;
@@ -265,6 +268,12 @@ export default {
         .icon {
           color: rgba(248, 232, 11, 0.993);
         }
+      }
+      .loading {
+        margin: 2rem auto;
+        width: 60%;
+        text-align: center;
+
       }
 </style>
 
