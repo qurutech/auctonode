@@ -24,10 +24,10 @@ export default {
             randomString: '',
             auth: {
                 basicPath: 'https://client.wavesplatform.com#gateway/auth',
-                referrer: '?r=https://auctonode.herokuapp.com/',
-                name: '?n=AuctoNode',
-                iconPath: '?i=https://wavesmania.net/images/aucttoken.png',
-                debug: '?debug=true'
+                referrer: '?r=https://auctonode.herokuapp.com',
+                name: '&n=AuctoNode',
+                iconPath: '&i=https://wavesmania.net/images/aucttoken.png',
+                debug: '&debug=true'
 
             }
         }
@@ -35,7 +35,7 @@ export default {
     methods: {
         generateRandom() {
             this.randomString = random();
-            this.auth.data = '?d=' + this.randomString;
+            this.auth.data = '&d=' + this.randomString;
             this.authUrlString = `${this.auth.basicPath}${this.auth.referrer}${this.auth.name}${this.auth.data}${this.auth.iconPath}${this.auth.debug}`
         }
     },
