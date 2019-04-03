@@ -7,7 +7,8 @@
             <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
-            <a :href="authUrlString" class="login__btn">Login</a>
+            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
+            <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
         </section>
         <section class="login">
             <router-link to="" class="login__btn">Buy Auct Token</router-link>
@@ -15,7 +16,8 @@
     </nav>
 </template>
 <script>
-    import random from '@/helpers/random';
+import random from '@/helpers/random';
+import { mapState, mapActions } from 'vuex'
 export default {
     name: 'AuctoNodeNavbar',
     data() {
@@ -32,16 +34,28 @@ export default {
             }
         }
     },
+    computed: mapState(['isLoggedIn']),
     methods: {
+        ...mapActions(['logout']),
         generateRandom() {
             this.randomString = random();
             this.auth.data = '&d=' + this.randomString;
             this.authUrlString = `${this.auth.basicPath}${this.auth.referrer}${this.auth.name}${this.auth.data}${this.auth.iconPath}${this.auth.debug}`
+        },
+        logoutOwner() {
+            this.logout()
+            this.$toasted.show(
+            "You've logged out from Auctonode",{
+            icon : {
+                name: "fa-smile-wink"
+            }
+                }
+            )
         }
     },
     created() {
         this.generateRandom();
-        console.log(this.randomString);
+        // console.log(this.randomString);
     }
 }
 </script>

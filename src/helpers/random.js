@@ -10,8 +10,8 @@ export default function() {
     
     const randomState = String.fromCharCode.apply(null, array);
 
-    console.log(randomState);
+    // console.log(randomState);
     
     return randomState;
 
-};
+}

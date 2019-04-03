@@ -69,7 +69,9 @@
 <script>
 // @ is an alias to /src
 import AuctoNodeNavbar from "@/components/navbar";
-import getQueryVariable from "@/helpers/getQueryVariable"
+import getQueryVariable from "@/helpers/getQueryVariable";
+import addressExist from "@/helpers/addressExist";
+import {mapActions} from 'vuex';
 export default {
   name: 'home',
   data() {
@@ -81,6 +83,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['login']),
     getAuctoNodeOwners: function() {
       fetch(`https://nodes.wavesnodes.com/assets/${this.assetID}/distribution`).then(response => response.json())
       .then((response) =>{
@@ -96,6 +99,22 @@ export default {
         this.filteredAuctArray = this.auctArray.filter((auct) => {
           return auct.quantity >= 1000000
         }).sort(function(a, b){return b.quantity-a.quantity})
+
+        if (getQueryVariable("a")) {
+          const isAddress = addressExist(this.filteredAuctArray, "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG");
+          if (isAddress) {
+            this.login();
+            localStorage.setItem("userAddress", JSON.stringify(getQueryVariable("a")));
+          } else {
+            this.$toasted.error(
+              "Only AuctoNode Owners can login at this moment",{
+                icon : {
+                  name: "fa-exclamation-circle"
+                }
+              }
+              );
+          }
+        }
       })
     }
   },
@@ -104,7 +123,6 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
-    console.log(getQueryVariable("a"))
   }
 }
 </script>
@@ -271,19 +289,23 @@ export default {
       }
       .loading {
         margin: 2rem auto;
-        width: 60%;
+        width: 20%;
         text-align: center;
         animation: bounce 900ms;
         animation-duration: 2s;
         animation-iteration-count: infinite;
-        animation-timing-function: linear;
+        animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
         transform-origin: bottom;
       }
 
       @keyframes bounce {
-        0%   { transform: translateY(0); }
-        50%  { transform: translateY(-20px); }
-        100% { transform: translateY(0); }
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-100px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        64%  { transform: scale(1,1)      translateY(0); }
+        100% { transform: scale(1,1)      translateY(0); }
     }
 </style>
 
