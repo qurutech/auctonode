@@ -4,7 +4,7 @@
     <ul class="sidebar__nav-items">
         <li class="sidebar__nav-item"><router-link to="/dashboard">Overview</router-link></li>
         <li class="sidebar__nav-item"><router-link to="/vote">Vote</router-link></li>
-        <li class="sidebar__nav-item active"><router-link to="/">Bo Back Home</router-link></li>
+        <li class="sidebar__nav-item active"><router-link to="/">Go Back Home</router-link></li>
         <li class="sidebar__nav-item active"><a href="" @click.prevent="logoutOwner">Logout</a></li>
     </ul>
     </nav>

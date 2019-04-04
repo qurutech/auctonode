@@ -76,6 +76,9 @@ nav {
     padding: 1rem 3rem;
     background-color: $primary-color;
     margin-bottom: 0;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
     a {
         color: lighten(#E27B36, 25%);
         text-decoration: none;

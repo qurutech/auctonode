@@ -5,11 +5,11 @@
 
     <section class="statistics">
       <section class="statistic">
-        <h2 class="statistic__title">Current AuctToken Price</h2>
+        <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
         <p class="statistic__stat">10</p>
       </section>
       <section class="statistic">
-        <h2 class="statistic__title">Current Waves Price</h2>
+        <h2 class="statistic__title">Waves <br /> Current  Price</h2>
         <p class="statistic__stat" v-if="waves">{{waves.USD}} USD</p>
       </section>
       <section class="statistic">
@@ -75,15 +75,16 @@ $secondary-color: darken($primary-color, 10%);
     .statistics {
       display: flex;
       justify-content: center;
-      align-items: center;
+      margin-top: 3rem;
       margin-bottom: 3rem;
-      width: 70%;
+      width: 80%;
       .statistic {        
         width: 220px;
-        height: 129px;
+        height: 80px;
         margin-bottom: 30px;
         border-radius: 8px;
         border: none;
+        text-align: center;
         background-image: linear-gradient(-135deg,$primary-color,$secondary-color);
         margin-right: 2rem;
         -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
@@ -95,12 +96,13 @@ $secondary-color: darken($primary-color, 10%);
         .statistic__title {
           font-weight: 500;
           color: lighten(#E27B36, 25%);
-          margin-bottom: 25px;
+          margin-bottom: 15px;
           font-family: 'Share Tech', sans-serif;
+          font-size: 16px !important;
         }
 
         .statistic__stat {
-          font-size: 30px;
+          font-size: 16px;
           color: lighten(#E27B36, 25%);
           margin-bottom: 0;
         }
