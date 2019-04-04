@@ -59,7 +59,7 @@ $primary-color: #E21250;
 $secondary-color: darken($primary-color, 10%);
 .loading {
     position: relative;
-    top: 50vh;
+    top: 1vh;
     background-color: lighten(#E27B36, 25%);
     padding: 1rem 2rem;
     color: $secondary-color;
