@@ -2,10 +2,10 @@
     <section class="sidebar">
     <nav class="sidebar__nav">
     <ul class="sidebar__nav-items">
-        <li class="sidebar__nav-item"><router-link to="/dashboard">Overview</router-link></li>
-        <li class="sidebar__nav-item"><router-link to="/vote">Vote</router-link></li>
-        <li class="sidebar__nav-item active"><router-link to="/">Go Back Home</router-link></li>
-        <li class="sidebar__nav-item active"><a href="" @click.prevent="logoutOwner">Logout</a></li>
+        <li class="sidebar__nav-item"><router-link to="/dashboard" :class="{'active': isActive == 1}">Overview</router-link></li>
+        <li class="sidebar__nav-item"><router-link to="/vote" :class="{'active': isActive == 2}">Vote</router-link></li>
+        <li class="sidebar__nav-item"><router-link to="/" >Go Back Home</router-link></li>
+        <li class="sidebar__nav-item"><a href="" @click.prevent="logoutOwner">Logout</a></li>
     </ul>
     </nav>
 </section>
@@ -14,6 +14,7 @@
 import { mapActions } from 'vuex'
 export default {
     name: 'sidebarNav',
+    props: ['isActive'],
     methods: {
         ...mapActions(['logout']),
         logoutOwner() {
@@ -75,6 +76,12 @@ padding: 0;
 }
 
 }
+}
+
+.active {
+    border-left: 8px solid  $secondary-color;
+    background-image: linear-gradient(-135deg,$primary-color,$secondary-color);
+    color: lighten(#E27B36, 25%) !important;
 }
 </style>
 

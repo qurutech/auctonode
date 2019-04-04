@@ -1,43 +1,53 @@
 <template>
-  <section class="dashboard">
+    <dashboard-layout>
 
-    <sidebar-nav />
+        <template slot="sidebar">
+          <sidebar-nav :isActive="1" />
+        </template>
 
-    <section class="statistics">
-      <section class="statistic">
-        <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
-        <p class="statistic__stat">10</p>
-      </section>
-      <section class="statistic">
-        <h2 class="statistic__title">Waves <br /> Current  Price</h2>
-        <p class="statistic__stat" v-if="waves">{{waves.USD}} USD</p>
-      </section>
-      <section class="statistic">
-        <h2 class="statistic__title">Shared Revenue:</h2>
-        <p class="statistic__stat">28.32 WAVES</p>
-      </section>
-      <section class="statistic">
-        <h2 class="statistic__title">Next Payout:</h2>
-        <p class="statistic__stat">APRIL</p>
-      </section>
-    </section>
 
-  </section>
-
+        <template slot="content">
+            <section class="statistics">
+            <section class="statistic">
+              <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
+              <p class="statistic__stat">10</p>
+            </section>
+            <section class="statistic">
+              <h2 class="statistic__title">Waves <br /> Current  Price</h2>
+              <p class="statistic__stat" v-if="waves">{{waves.USD}} USD</p>
+            </section>
+            <section class="statistic">
+              <h2 class="statistic__title">Waves Balance</h2>
+              <p class="statistic__stat">{{wavesBalance}} WAVES</p>
+            </section>
+            <section class="statistic">
+              <h2 class="statistic__title">Auct Token <br /> Balance</h2>
+              <p class="statistic__stat">N/A</p>
+            </section>
+          </section>
+          <section class="welcome">
+            <p>Welcome, {{userAddress}}</p>
+          </section>
+        </template>
+    </dashboard-layout>
+  
 </template>
 <script>
 import { mapState } from 'vuex'
 import sidebarNav from '@/components/sidebarNav'
+import dashboardLayout from '@/components/Layouts/dashboardLayout'
 export default {
   name: 'Dashboard',
   data() {
     return {
-      waves: ''
+      waves: '',
+      wavesBalance: 0,
     }
   },
   computed: mapState(['userAddress']),
   components: {
     sidebarNav,
+    dashboardLayout
   },
   methods: {
     fetchWavesPrice() {
@@ -48,26 +58,23 @@ export default {
       }).then(response => response.json())
       .then(response => {
         this.waves = response;
-        console.log(response)
       })
-    }
+    },
+    fetchCurrentWavesBalance() {
+      fetch(`https://nodes.wavesplatform.com/addresses/balance/${this.userAddress}`)
+      .then(response => response.json())
+      .then(response => this.wavesBalance = response.balance / 100000000)
+    },
   },
-  mounted() {
-    this.fetchWavesPrice()
+  created() {
+    this.fetchWavesPrice();
+    this.fetchCurrentWavesBalance();
   }
 }
 </script>
 <style lang="scss" scoped>
 $primary-color: #E21250;
 $secondary-color: darken($primary-color, 10%);
-.dashboard {
-  font-family: 'Share Tech', sans-serif;
-  height: 100vh;
-  background-color: $secondary-color;
-  margin: 0;
-  display: flex;
-  justify-content: flex-end;
-}
 
 .link {
   color: $secondary-color;
@@ -75,7 +82,7 @@ $secondary-color: darken($primary-color, 10%);
     .statistics {
       display: flex;
       justify-content: center;
-      margin-top: 3rem;
+      margin-top: 4rem;
       margin-bottom: 3rem;
       width: 80%;
       .statistic {        
@@ -109,6 +116,12 @@ $secondary-color: darken($primary-color, 10%);
       }
     }
 
+  .welcome {
+    color: lighten(#E27B36, 25%);
+    position: fixed;
+    left: 270px;
+    right: 20px;
+  }
 
     
 </style>
