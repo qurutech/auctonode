@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Toasted from 'vue-toasted';
+import VueFilter from 'vue-filter';
 import App from './App.vue';
 import { router } from './router';
 import store from './store';
@@ -13,6 +14,8 @@ Vue.use(Toasted, {
   singleton: true,
   duration: 8000
 });
+
+Vue.use(VueFilter);
 
 new Vue({
   router,

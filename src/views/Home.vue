@@ -7,7 +7,7 @@
       <section class="statistics">
         <section class="statistic">
           <h2 class="statistic__title">Total AuctoNodes:</h2>
-          <p class="statistic__stat">{{filteredAuctArray.length}}</p>
+          <p class="statistic__stat" v-if="filteredAuctArray.length > 0">{{filteredAuctArray.length - 1}}</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Staked Auct Token:</h2>
@@ -29,7 +29,7 @@
         <section class="header">
           <h2 class="header__title">Address</h2>
           <h2 class="header__title">Quantity</h2>
-          <h2 class="header__title">KYI Status</h2>
+          <h2 class="header__title">KYC Status</h2>
         </section>
         <section v-if="filteredAuctArray.length == 0" class="loading">AuctoNode is fetching owners. Please wait..</section>
         <section class="body" else>
@@ -38,7 +38,7 @@
               <p class="item__content"><a href="">{{auct.address}}</a></p>
               <p class="item__content">{{ auct.quantity }} Auct Token</p>
             </section>
-            <p class="kyi-status">Verified</p>
+            <p class="kyi-status">Unverified</p>
             <a href="" class="vote">Vote</a>
           </section>
         </section>
