@@ -18,7 +18,8 @@ $secondary-color: darken($primary-color, 10%);
     background-color: $secondary-color;
     margin: 0;
     display: flex;
-    justify-content:flex-end;
+    flex-direction: column;
+    align-items:flex-end;
 }
 
 </style>

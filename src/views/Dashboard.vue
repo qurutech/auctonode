@@ -8,29 +8,32 @@
 
         <template slot="content">
             <section class="statistics">
-            <section class="statistic">
-              <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
-              <p class="statistic__stat">10</p>
-            </section>
-            <section class="statistic">
-              <h2 class="statistic__title">Waves <br /> Current  Price</h2>
-              <p class="statistic__stat" v-if="waves">{{waves.USD}} USD</p>
-            </section>
-            <section class="statistic">
-              <h2 class="statistic__title">Waves Balance</h2>
-              <p class="statistic__stat">{{wavesBalance}} WAVES</p>
-            </section>
-            <section class="statistic">
-              <h2 class="statistic__title">Auct Token <br /> Balance</h2>
-              <p class="statistic__stat">{{auctBalance}} Auct Token</p>
-            </section>
+              <section class="statistic">
+                <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
+                <p class="statistic__stat">10</p>
+              </section>
+              <section class="statistic">
+                <h2 class="statistic__title">Waves <br /> Current  Price</h2>
+                <p class="statistic__stat" v-if="waves">{{waves.USD}} USD</p>
+              </section>
+              <section class="statistic">
+                <h2 class="statistic__title">Waves Balance</h2>
+                <p class="statistic__stat">{{wavesBalance}} WAVES</p>
+              </section>
+              <section class="statistic">
+                <h2 class="statistic__title">Auct Token <br /> Balance</h2>
+                <p class="statistic__stat">{{auctBalance}} Auct Token</p>
+              </section>
           </section>
           <section class="welcome">
             <p>Welcome, {{userAddress}}</p>
           </section>
+          <section class="voting-history">
+            <h3>Voting History</h3>
+            <p>No votes have been carried out recently by Auctonode</p>
+          </section>
         </template>
     </dashboard-layout>
-  
 </template>
 <script>
 import { mapState } from 'vuex'
@@ -130,7 +133,14 @@ $secondary-color: darken($primary-color, 10%);
     right: 20px;
   }
 
-    
+  .voting-history {
+    align-self: center;
+    color: lighten(#E27B36, 25%);
+
+    h3 {
+      text-align: center;
+    }
+  }
 </style>
 
 
