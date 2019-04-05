@@ -47,18 +47,18 @@
         <section>
           <h3 class="footer">AuctoNode &copy; 2019</h3> <br>
           <ul>
-            <li><a href=""><i class="fas fa-futbol"></i> Need help?</a></li>
-            <li><a href=""><i class="fas fa-lock"></i> Privacy Policy?</a></li>
-            <li><a href="">Terms of Servie</a></li>
-            <li><a href="">API Documentation</a></li>
+            <li><a href="https://t.me/auctionlance"><i class="fas fa-futbol"></i> Need help?</a></li>
+            <li><a href="https://www.auctionlance.com"><i class="fas fa-globe"></i> Our Website</a></li>
+            <li><a href="https://forum.wavesplatform.com/t/auctionlance-platform-hire-and-pay-freelancers-with-crypto/10850"><i class="fas fa-question-circle"></i> How It Works</a></li>
           </ul>
         </section>
         <section>
           <ul class="social">
-            <li><a href=""><i class="fab fa-telegram"></i></a></li>
-            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href=""><i class="fab fa-twitter"></i></a></li>
-            <li><a href=""><i class="fab fa-github"></i></a></li>
+            <li><a href="https://t.me/auctionlance"><i class="fab fa-telegram"></i></a></li>
+            <li><a href="https://facebook.com/auctionlance"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/aucttoken"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/auctionlance"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://youtube.com/auctionlance"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </section>
       </footer>

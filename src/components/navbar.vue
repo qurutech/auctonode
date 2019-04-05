@@ -7,7 +7,7 @@
             <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
-            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
+            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn" :disabled="true">Login</a>
             <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
         </section>
         <section class="login" style="margin-right: -60px">

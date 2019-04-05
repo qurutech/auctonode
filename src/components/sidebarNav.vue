@@ -2,10 +2,10 @@
     <section class="sidebar">
     <nav class="sidebar__nav">
     <ul class="sidebar__nav-items">
-        <li class="sidebar__nav-item"><router-link to="/dashboard" :class="{'active': isActive == 1}">Overview</router-link></li>
-        <li class="sidebar__nav-item"><router-link to="/vote" :class="{'active': isActive == 2}">Vote</router-link></li>
-        <li class="sidebar__nav-item"><router-link to="/" >Go Back Home</router-link></li>
-        <li class="sidebar__nav-item"><a href="" @click.prevent="logoutOwner">Logout</a></li>
+        <li class="sidebar__nav-item"><router-link to="/dashboard" :class="{'active': isActive == 1}"><i class="fas fa-home"></i> Overview</router-link></li>
+        <li class="sidebar__nav-item"><router-link to="/vote" :class="{'active': isActive == 2}"><i class="fas fa-thumbs-up"></i> Vote</router-link></li>
+        <li class="sidebar__nav-item"><router-link to="/" ><i class="fas fa-igloo"></i> Go Back Home</router-link></li>
+        <li class="sidebar__nav-item"><a href="" @click.prevent="logoutOwner"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
     </nav>
 </section>
