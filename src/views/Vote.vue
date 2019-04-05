@@ -67,7 +67,7 @@ $secondary-color: darken($primary-color, 10%);
     margin-left: -133px;
     align-self: center;
     text-decoration: none;
-    margin: 0rem auto;
+    margin: 40vh auto;
     width: 20%;
     text-align: center;
     animation: bounce 900ms;

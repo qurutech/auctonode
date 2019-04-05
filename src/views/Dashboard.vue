@@ -134,6 +134,7 @@ $secondary-color: darken($primary-color, 10%);
   }
 
   .voting-history {
+    margin-top: 10vh;
     align-self: center;
     color: lighten(#E27B36, 25%);
 
