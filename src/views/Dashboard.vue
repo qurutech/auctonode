@@ -43,7 +43,7 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      waves: '',
+      waves: 0,
       wavesBalance: 0,
       auctBalance: 0
     }
@@ -134,12 +134,14 @@ $secondary-color: darken($primary-color, 10%);
   }
 
   .voting-history {
-    margin-top: 10vh;
     align-self: center;
     color: lighten(#E27B36, 25%);
 
-    h3 {
+    h3, p {
       text-align: center;
+    }
+    p {
+      margin-top: 10vh;
     }
   }
 </style>
