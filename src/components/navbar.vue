@@ -14,7 +14,7 @@
             <router-link to="/dashboard" class="login__btn" v-if="isLoggedIn">Dashboard</router-link>
         </section>
         <section class="login">
-            <router-link to="" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</router-link>
+            <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
         </section>
     </nav>
 </template>

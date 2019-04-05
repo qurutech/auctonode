@@ -22,7 +22,7 @@
             </section>
             <section class="statistic">
               <h2 class="statistic__title">Auct Token <br /> Balance</h2>
-              <p class="statistic__stat">N/A</p>
+              <p class="statistic__stat">{{auctBalance}} Auct Token</p>
             </section>
           </section>
           <section class="welcome">
@@ -42,9 +42,10 @@ export default {
     return {
       waves: '',
       wavesBalance: 0,
+      auctBalance: 0
     }
   },
-  computed: mapState(['userAddress']),
+  computed: mapState(['userAddress', 'auctAddressId']),
   components: {
     sidebarNav,
     dashboardLayout
@@ -65,10 +66,16 @@ export default {
       .then(response => response.json())
       .then(response => this.wavesBalance = response.balance / 100000000)
     },
+    fetchCurrentAuctBalance() {
+      fetch(`https://nodes.wavesplatform.com/assets/balance/${this.userAddress}/${this.auctAddressId}`)
+      .then(response => response.json())
+      .then(response => this.auctBalance = response.balance / 100000000)
+    }
   },
   created() {
     this.fetchWavesPrice();
     this.fetchCurrentWavesBalance();
+    this.fetchCurrentAuctBalance();
   }
 }
 </script>

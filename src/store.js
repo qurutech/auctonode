@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
-    userAddress: JSON.parse(localStorage.getItem("userAddress")) || ""
+    userAddress: JSON.parse(localStorage.getItem("userAddress")) || "",
+    auctAddressId: "53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh"
   },
   mutations: {
     LOGIN(state) {
