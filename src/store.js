@@ -27,7 +27,8 @@ export default new Vuex.Store({
       context.commit("LOGOUT");
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userAddress");
-      router.push("/");
+      localStorage.removeItem("authorize");
+      router.push("/authorize");
     }
   }
 });

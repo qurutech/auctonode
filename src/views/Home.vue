@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <aucto-node-navbar />
+    <aucto-node-navbar :randomString="randomString" />
     <main class="aucto-owners">
       <h1 class="section-heading"><i class="fas fa-bolt icon"></i> Network Status: <span class="icon">Active</span></h1>
 
@@ -71,7 +71,9 @@
 import AuctoNodeNavbar from "@/components/navbar";
 import getQueryVariable from "@/helpers/getQueryVariable";
 import addressExist from "@/helpers/addressExist";
+import {validate} from "@/helpers"
 import {mapActions} from 'vuex';
+import random from '@/helpers/random';
 export default {
   name: 'home',
   data() {
@@ -79,7 +81,8 @@ export default {
       assetID: "53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh",
       auctAsset: '',
       auctArray: [],
-      filteredAuctArray: []
+      filteredAuctArray: [],
+      randomString: ''
     }
   },
   methods: {
@@ -100,12 +103,42 @@ export default {
           return auct.quantity >= 1000000
         }).sort(function(a, b){return b.quantity-a.quantity})
 
-        if (getQueryVariable("a")) {
+        if (getQueryVariable("a") && getQueryVariable("p")) {
           const isAddress = addressExist(this.filteredAuctArray, getQueryVariable("a"));
-          if (isAddress) {
+          const addressIsValid = validate.addressValidate(getQueryVariable("p"), getQueryVariable("a"))
+
+          const signedData = {
+            host: 'https://auctonode.herokuapp.com',
+            data: this.randomString
+          }
+
+          let signatureCheck = validate.authValidate(signedData, getQueryVariable("s"), getQueryVariable("p"));
+          
+          signatureCheck.then(result => {
+            if(!result) {
+              this.$toasted.error(
+              "Signature is not valid",{
+                icon : {
+                  name: "fa-exclamation-circle"
+                }
+              }
+              );
+              return;
+            }
+          })
+          if (isAddress && addressIsValid && signatureValid) {
             this.login();
             localStorage.setItem("userAddress", JSON.stringify(getQueryVariable("a")));
-          } else {
+          } else if(!addressIsValid) {
+            this.$toasted.error(
+              "Address does not match public key - address swapping detected",{
+                icon : {
+                  name: "fa-exclamation-circle"
+                }
+              }
+              );
+          }
+          else {
             this.$toasted.error(
               "Only AuctoNode Owners can login at this moment",{
                 icon : {
@@ -116,6 +149,9 @@ export default {
           }
         }
       })
+    },
+    generateRandomString() {
+      this.randomString = random();
     }
   },
   components: {
@@ -123,6 +159,8 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
+    this.generateRandomString()
+      
   }
 }
 </script>

@@ -7,7 +7,7 @@
             <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
-            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn" :disabled="true">Login</a>
+            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
             <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
         </section>
         <section class="login" style="margin-right: -60px">
@@ -23,10 +23,10 @@ import random from '@/helpers/random';
 import { mapState, mapActions } from 'vuex'
 export default {
     name: 'AuctoNodeNavbar',
+    props: ['randomString'],
     data() {
         return {
             authUrlString: '',
-            randomString: '',
             auth: {
                 basicPath: 'https://client.wavesplatform.com#gateway/auth',
                 referrer: '?r=https://auctonode.herokuapp.com',
@@ -41,7 +41,6 @@ export default {
     methods: {
         ...mapActions(['logout']),
         generateRandom() {
-            this.randomString = random();
             this.auth.data = '&d=' + this.randomString;
             this.authUrlString = `${this.auth.basicPath}${this.auth.referrer}${this.auth.name}${this.auth.data}${this.auth.iconPath}${this.auth.debug}`
         },

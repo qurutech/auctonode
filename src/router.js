@@ -28,20 +28,33 @@ export const router =  new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Vote.vue')
+    },
+    {
+      path: '/authorize',
+      name: 'authorize',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Authorize.vue')
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/',];
+  const publicPages = ['/authorize',];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('isLoggedIn');
+  const authorized = localStorage.getItem('authorize'); 
+    if (to.path !== '/authorize' ) {
+      if (authorized && to.path !== '/' && !loggedIn) {
+        return next('/');
+      } else if (authorized && authRequired && !loggedIn && to.path !== '/')  {
+        return next('/');
+      } else if (!authorized  && to.path !== '/authorize') {
+        return next('/authorize');
+      }
 
-  
-  if (authRequired && !loggedIn ) {
-    return next('/');
-  }
-
+    }
   next();
 });
