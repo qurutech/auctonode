@@ -126,7 +126,7 @@ export default {
               return;
             }
           })
-          if (isAddress && addressIsValid && signatureValid) {
+          if (isAddress && addressIsValid) {
             this.login();
             localStorage.setItem("userAddress", JSON.stringify(getQueryVariable("a")));
           } else if(!addressIsValid) {
