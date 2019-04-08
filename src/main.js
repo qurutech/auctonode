@@ -11,7 +11,6 @@ Vue.use(Toasted, {
   iconPack: 'fontawesome',
   theme: 'bubble',
   closeOnSwipe: true,
-  singleton: true,
   duration: 8000
 });
 
