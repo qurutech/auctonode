@@ -104,7 +104,7 @@ export default {
           return auct.quantity >= 1000000
         }).sort(function(a, b){return b.quantity-a.quantity})
 
-        this.totalStakedAuct = this.filteredAuctArray.reduce((total, auct) => {
+        this.totalStakedAuct = this.filteredAuctArray.filter(auct => auct.address !== '3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG').reduce((total, auct) => {
           return total + auct.quantity
         }, 0)
 
