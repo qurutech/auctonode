@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Toasted from 'vue-toasted';
-import VueFilter from 'vue-filter';
 import Vue2Filters from 'vue2-filters';
 import App from './App.vue';
 import { router } from './router';
@@ -14,8 +13,6 @@ Vue.use(Toasted, {
   closeOnSwipe: true,
   duration: 8000
 });
-
-Vue.use(VueFilter);
 
 Vue.use(Vue2Filters);
 
