@@ -11,7 +11,7 @@
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Staked Auct Token:</h2>
-          <p class="statistic__stat">36613408.26220146</p>
+          <p class="statistic__stat">{{totalStakedAuct | currency(' ')}}</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Shared Revenue:</h2>
@@ -35,8 +35,8 @@
         <section class="body" else>
           <section v-for="(auct, index) in filteredAuctArray" :key="index" class="items">
             <section class="item">
-              <p class="item__content"><a href="">{{auct.address}}</a></p>
-              <p class="item__content">{{ auct.quantity }} Auct Token</p>
+              <p class="item__content"><a href="">{{auct.address | truncate(30)}}</a></p>
+              <p class="item__content">{{ auct.quantity | currency(' ')}} Auct Token</p>
             </section>
             <p class="kyi-status">Unverified</p>
             <a href="" class="vote">Vote</a>
@@ -82,7 +82,8 @@ export default {
       auctAsset: '',
       auctArray: [],
       filteredAuctArray: [],
-      randomString: ''
+      randomString: '',
+      totalStakedAuct: 0
     }
   },
   methods: {
@@ -103,6 +104,10 @@ export default {
           return auct.quantity >= 1000000
         }).sort(function(a, b){return b.quantity-a.quantity})
 
+        this.totalStakedAuct = this.filteredAuctArray.reduce((total, auct) => {
+          return total + auct.quantity
+        }, 0)
+
         if (getQueryVariable("a") && getQueryVariable("p")) {
           const isAddress = addressExist(this.filteredAuctArray, getQueryVariable("a"));
           const addressIsValid = validate.addressValidate(getQueryVariable("p"), getQueryVariable("a"))
@@ -115,7 +120,7 @@ export default {
           let signatureCheck = validate.authValidate(signedData, getQueryVariable("s"), getQueryVariable("p"));
           
           signatureCheck.then(result => {
-            if(!result) {
+            if(result === false) {
               this.$toasted.error(
               "Signature is not valid",{
                 icon : {

@@ -4,7 +4,7 @@
             <h3><router-link to="/" class="brand__link">AuctoNode</router-link></h3>
         </section>
         <section class="search">
-            <input type="text"  placeholder="Search Candidates/Voters" class="search__box"/>
+            <input type="text"  placeholder="Search AuctoNode Owners" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
             <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
