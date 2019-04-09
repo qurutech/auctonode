@@ -16,6 +16,27 @@
         <section class="login">
             <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
         </section>
+        <section class="mobile-nav">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <router-link to="/" class="mobile__btn"><i class="fas fa-igloo"></i> Home </router-link>
+                </li>
+                <li  class="mobile-nav-item">
+                    <router-link to="/dashboard" class="mobile__btn" v-if="isLoggedIn"><i class="fas fa-tachometer-alt"></i> Dashboard</router-link>
+                </li>
+                <li  class="mobile-nav-item">
+                    <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="mobile__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a :href="authUrlString" class="mobile__btn" v-if="!isLoggedIn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+
+                <li class="mobile-nav-item">
+                    <a href="" @click.prevent="logoutOwner" class="mobile__btn" v-if="isLoggedIn"><i class="fas fa-sign-out-alt"></i>  Log Out</a>
+                </li>
+
+            </ul>
+        </section>
     </nav>
 </template>
 <script>
@@ -77,6 +98,13 @@ nav {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    @media screen and (max-width: 767px) {
+        & {
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem 1.5rem;
+        }
+    }
     a {
         color: lighten(#E27B36, 25%);
         text-decoration: none;
@@ -88,8 +116,15 @@ nav {
         background: $secondary-color;
         border-radius: 5rem;
         width: 400px;
-        color: darken(#fff, 50%);
+        color: lighten(#E27B36, 25%);
 
+        @media screen and (max-width: 767px) {
+        & {
+            width: 100%;
+            padding: .5rem 1rem;
+            box-sizing: border-box;
+        }
+    }
         &:focus {
             outline: none;
         }
@@ -104,6 +139,47 @@ nav {
         font-weight: 500;
         font-family: "Segoe UI" sans-serif;
     }
+
+    .login {
+    @media screen and (max-width: 767px) {
+        & {
+            display: none;
+        }
+    }
+    }
 }
+
+    .mobile-nav {
+        display: none;
+
+        .mobile-nav-list {
+            padding-right: 0;
+            padding-left: 0;
+            display: flex;
+            list-style-type: none;
+            justify-content: space-evenly;
+            width: 100%;
+
+            .mobile-nav-item {
+                a {
+                    color: black;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .mobile-nav {
+            overflow: auto;
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            background-color: lighten(#E27B36, 25%);
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    }
 
 </style>

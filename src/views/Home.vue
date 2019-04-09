@@ -29,17 +29,34 @@
         <section class="header">
           <h2 class="header__title">Address</h2>
           <h2 class="header__title">Quantity</h2>
-          <h2 class="header__title">KYC Status</h2>
+          <h2 class="header__title" id="kyc-status">KYC Status</h2>
         </section>
         <section v-if="filteredAuctArray.length == 0" class="loading">AuctoNode is fetching owners. Please wait..</section>
         <section class="body" else>
           <section v-for="(auct, index) in filteredAuctArray" :key="index" class="items">
             <section class="item">
-              <p class="item__content"><a href="">{{auct.address | truncate(30)}}</a></p>
+              <p class="item__content"><a :href="'https://wavesexplorer.com/address/' + auct.address" target="_blank">{{auct.address | truncate(30)}}</a></p>
               <p class="item__content">{{ auct.quantity | currency(' ')}} Auct Token</p>
             </section>
-            <p class="kyi-status">Unverified</p>
             <a href="" class="vote">Vote</a>
+
+            <p class="kyi-status">Unverified</p>
+
+          </section>
+        </section>
+        <section class="mobile-auctonode" else>
+          <section class="mobile-card" v-for="(auct, index) in filteredAuctArray" :key="index">
+              <section>
+                <p class="address"><a :href="'https://wavesexplorer.com/address/' + auct.address" target="_blank">{{auct.address | truncate(30)}}</a></p>
+                <p class="quantity">{{ auct.quantity | currency(' ')}} Auct Token</p>
+
+                <section class="mobile-auctonode__footer">
+                  <p class="kyc-status">Unverified</p>
+                  <p>
+                    <a href="" class="mobile-vote">Vote</a>
+                  </p>
+                </section>
+              </section>
           </section>
         </section>
       </section>
@@ -118,7 +135,7 @@ export default {
           }
 
           let signatureCheck = validate.authValidate(signedData, getQueryVariable("s"), getQueryVariable("p"));
-          
+
           signatureCheck.then(result => {
             if(result === false) {
               this.$toasted.error(
@@ -165,7 +182,7 @@ export default {
   created() {
     this.getAuctoNodeOwners();
     this.generateRandomString()
-      
+
   }
 }
 </script>
@@ -176,20 +193,10 @@ export default {
     main {
       font-family: 'Share Tech', sans-serif;
       padding: 1.25rem;
-      background-color: $secondary-color; 
+      background-color: $secondary-color;
       margin-top: 0;
-      padding-top: 5vh;np
-
-      .section-heading {
-        margin-left: 5rem;
-        margin-bottom: 3rem;
-        font-family: 'Share Tech', sans-serif;
-        // color: rgba(248, 232, 11, 0.993);
-        color: #E27B36;
-
-        .icon {
-          color: rgba(248, 232, 11, 0.993);
-        }
+      padding-top: 5vh;
+      @media screen and (max-width: 767px) {
       }
     }
 
@@ -197,15 +204,28 @@ export default {
       display: flex;
       justify-content: space-evenly;
       margin-bottom: .5rem !important;
-      color: lighten(#E27B36, 25%); 
+      color: lighten(#E27B36, 25%);
 
+      @media screen and (max-width: 767px) {
+        & {
+          display: none;
+        }
+      }
       .header__title {
         font-weight: normal;
+        @media screen and (max-width: 767px) {
+          font-size: 18px;
+        }
       }
     }
 
     .body {
 
+      @media screen and (max-width: 767px) {
+        & {
+          display: none;
+        }
+      }
       .items {
         display: flex;
         justify-content: space-around;
@@ -223,6 +243,12 @@ export default {
         -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
         box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
+
+        @media screen and (max-width: 767px) {
+          justify-content: flex-end;
+          width: 100%;
+          overflow: auto;
+        }
         a {
           color: rgba(248, 232, 11, 0.993);
           // color: lighten(#E27B36, 25%);
@@ -230,7 +256,13 @@ export default {
         }
 
         p.item__content {
-          color: lighten(#E27B36, 25%); ;
+          color: lighten(#E27B36, 25%);
+
+          @media screen and (max-width: 767px) {
+            font-size: 12px;
+            margin-right: .5rem;
+
+          }
         }
       }
     }
@@ -239,7 +271,15 @@ export default {
       display: flex;
       justify-content: center;
       margin-bottom: 3rem;
-      .statistic {        
+
+      @media screen and (max-width: 767px) {
+        & {
+          overflow: scroll;
+          width: 100%;
+
+        }
+      }
+      .statistic {
         width: 220px;
         height: 129px;
         margin-bottom: 30px;
@@ -251,19 +291,29 @@ export default {
         -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
         box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
         padding: 1.25rem;
+        flex-shrink: 0;
 
-
+        @media screen and (max-width: 767px) {
+          width: 149px;
+        }
         .statistic__title {
           font-weight: 500;
           color: lighten(#E27B36, 25%);
           margin-bottom: 25px;
           font-family: 'Share Tech', sans-serif;
+          @media screen and (max-width: 767px) {
+            font-size: 24px;
+          }
         }
 
         .statistic__stat {
           font-size: 30px;
           color: lighten(#E27B36, 25%);
           margin-bottom: 0;
+
+          @media screen and (max-width: 767px) {
+            font-size: 18px;
+          }
         }
       }
     }
@@ -278,7 +328,11 @@ export default {
       align-self: flex-start;
       text-decoration: none;
     }
-
+    @media screen and (max-width: 767px) {
+      .kyi-status, .vote {
+        display: none;
+      }
+    }
     .vote {
       transition: all 500ms;
       background-color: $primary-color;
@@ -291,6 +345,13 @@ export default {
 
     footer {
       padding: 3rem 3rem;
+
+      @media screen and (max-width: 767px) {
+        & {
+          padding: 0;
+          margin-bottom: 3rem;
+        }
+      }
       .footer {
         margin-bottom: 0 !important;
         // color: rgb(56, 53, 53);
@@ -304,7 +365,7 @@ export default {
           margin-right: 1rem !important;
           a {
             text-decoration: none;
-            color: lighten(#E27B36, 25%); 
+            color: lighten(#E27B36, 25%);
 
           }
           margin: 0;
@@ -316,6 +377,13 @@ export default {
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
+
+        @media screen and (max-width: 767px) {
+          & {
+            justify-content: center;
+            align-items: center
+          }
+        }
       }
     }
 
@@ -323,9 +391,11 @@ export default {
         margin-left: 5rem;
         margin-bottom: 3rem;
         font-family: 'Share Tech', sans-serif;
-        // color: rgba(248, 232, 11, 0.993);
         color: #E27B36;
-
+        @media screen and (max-width: 767px) {
+          margin-left: 0;
+          font-size: 20px;
+        }
         .icon {
           color: rgba(248, 232, 11, 0.993);
         }
@@ -339,6 +409,12 @@ export default {
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
         transform-origin: bottom;
+
+        @media screen and (max-width: 767px) {
+          & {
+            width: 50%;
+          }
+        }
       }
 
       @keyframes bounce {
@@ -349,6 +425,48 @@ export default {
         57%  { transform: scale(1,1)      translateY(-7px); }
         64%  { transform: scale(1,1)      translateY(0); }
         100% { transform: scale(1,1)      translateY(0); }
+    }
+
+    .mobile-auctonode {
+      display: flex;
+      flex-direction: column;
+      .mobile-card {
+        border-radius: 8px;
+        border: none;
+        background-image: linear-gradient(-135deg,$primary-color,$secondary-color);
+        -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
+        box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.75);
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+        font-size: 18px;
+        color: lighten(#E27B36, 25%);
+        p.quantity {
+          font-size: 24px;
+        }
+        .address {
+          a {
+            color: rgba(248, 232, 11, 0.993);
+            text-decoration: none;
+          }
+        }
+        .mobile-vote {
+          background-color: lighten(#E27B36, 25%);
+          padding: 1rem 2rem;
+          color: $secondary-color;
+          border-radius: 4px;
+          text-decoration: none;
+          text-align: center;
+        }
+      }
+    }
+
+    .mobile-auctonode__footer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+
     }
 </style>
 
