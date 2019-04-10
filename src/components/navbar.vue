@@ -123,6 +123,7 @@ nav {
             width: 100%;
             padding: .5rem 1rem;
             box-sizing: border-box;
+            margin-left: 1rem;
         }
     }
         &:focus {

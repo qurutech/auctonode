@@ -271,15 +271,22 @@ export default {
       display: flex;
       justify-content: center;
       margin-bottom: 3rem;
+      overflow: scroll;
 
       @media screen and (max-width: 767px) {
         & {
           overflow: scroll;
           width: 100%;
+          justify-content: flex-start;
 
         }
       }
       .statistic {
+
+        &:first-child {
+          margin-left: .5rem;
+        }
+
         width: 220px;
         height: 129px;
         margin-bottom: 30px;
@@ -389,7 +396,7 @@ export default {
 
     .section-heading {
         margin-left: 5rem;
-        margin-bottom: 3rem;
+        margin-bottom: 3rem !important;
         font-family: 'Share Tech', sans-serif;
         color: #E27B36;
         @media screen and (max-width: 767px) {
@@ -426,6 +433,11 @@ export default {
         64%  { transform: scale(1,1)      translateY(0); }
         100% { transform: scale(1,1)      translateY(0); }
     }
+
+  .mobile-auctonode {
+    display: none;
+  }
+  @media screen and (max-width: 767px) {
 
     .mobile-auctonode {
       display: flex;
@@ -468,5 +480,6 @@ export default {
 
 
     }
+  }
 </style>
 
