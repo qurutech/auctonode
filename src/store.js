@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
     isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
     userAddress: JSON.parse(localStorage.getItem("userAddress")) || "",
-    auctAddressId: "53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh"
+    auctAssetId: "53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh",
+    auctAddress: "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG",
+    wctAssetId: 'DHgwrRvVyqJsepd32YbBqUeDH4GJ1N984X8QoekjgH8J'
   },
   mutations: {
     LOGIN(state) {

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 
+
 Vue.use(Router);
 
 export const router =  new Router({
@@ -19,15 +20,15 @@ export const router =  new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Dashboard.vue')
+      component: () => import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue')
     },
     {
-      path: '/vote',
+      path: '/vote/:address',
       name: 'vote',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Vote.vue')
+      component: () => import(/* webpackChunkName: "vote" */ './views/Vote.vue')
     },
     // {
     //   path: '/authorize',
@@ -46,7 +47,7 @@ router.beforeEach((to, from, next) => {
   const publicPages = ['/',];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('isLoggedIn');
-  // const authorized = localStorage.getItem('authorize'); 
+  // const authorized = localStorage.getItem('authorize');
     // if (to.path !== '/authorize' ) {
     //   if (authorized && to.path !== '/' && !loggedIn) {
     //     return next('/');

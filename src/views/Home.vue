@@ -38,9 +38,10 @@
               <p class="item__content"><a :href="'https://wavesexplorer.com/address/' + auct.address" target="_blank">{{auct.address | truncate(30)}}</a></p>
               <p class="item__content">{{ auct.quantity | currency(' ')}} Auct Token</p>
             </section>
-            <a href="" class="vote">Vote</a>
 
             <p class="kyi-status">Unverified</p>
+
+            <router-link :to="'vote/' + auct.address" class="vote">Vote</router-link>
 
           </section>
         </section>
@@ -89,7 +90,7 @@ import AuctoNodeNavbar from "@/components/navbar";
 import getQueryVariable from "@/helpers/getQueryVariable";
 import addressExist from "@/helpers/addressExist";
 import {validate} from "@/helpers"
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import random from '@/helpers/random';
 export default {
   name: 'home',
@@ -103,6 +104,7 @@ export default {
       totalStakedAuct: 0
     }
   },
+  computed: mapState(['isLoggedIn']),
   methods: {
     ...mapActions(['login']),
     getAuctoNodeOwners: function() {
@@ -130,7 +132,7 @@ export default {
           const addressIsValid = validate.addressValidate(getQueryVariable("p"), getQueryVariable("a"))
 
           const signedData = {
-            host: 'https://auctonode.herokuapp.com',
+            host: 'https://auctonode.herokuapp.com/',
             data: this.randomString
           }
 
@@ -271,11 +273,11 @@ export default {
       display: flex;
       justify-content: center;
       margin-bottom: 3rem;
-      overflow: scroll;
+      overflow: auto;
 
       @media screen and (max-width: 767px) {
         & {
-          overflow: scroll;
+          overflow: auto;
           width: 100%;
           justify-content: flex-start;
 

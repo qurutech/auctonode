@@ -10,7 +10,7 @@
             <section class="statistics">
               <section class="statistic">
                 <h2 class="statistic__title">Auct Token <br /> Current  Price</h2>
-                <p class="statistic__stat">10</p>
+                <p class="statistic__stat">{{10 | currency(' ')}}</p>
               </section>
               <section class="statistic">
                 <h2 class="statistic__title">Waves <br /> Current  Price</h2>
@@ -18,11 +18,11 @@
               </section>
               <section class="statistic">
                 <h2 class="statistic__title">Waves Balance</h2>
-                <p class="statistic__stat">{{wavesBalance}} WAVES</p>
+                <p class="statistic__stat">{{wavesBalance | currency(' ')}} WAVES</p>
               </section>
               <section class="statistic">
                 <h2 class="statistic__title">Auct Token <br /> Balance</h2>
-                <p class="statistic__stat">{{auctBalance}} Auct Token</p>
+                <p class="statistic__stat">{{auctBalance | currency(' ')}} Auct Token</p>
               </section>
           </section>
           <section class="welcome">
@@ -36,9 +36,9 @@
     </dashboard-layout>
 </template>
 <script>
-import { mapState } from 'vuex'
-import sidebarNav from '@/components/sidebarNav'
-import dashboardLayout from '@/components/Layouts/dashboardLayout'
+import { mapState } from 'vuex';
+import sidebarNav from '@/components/sidebarNav';
+import dashboardLayout from '@/components/Layouts/dashboardLayout';
 export default {
   name: 'Dashboard',
   data() {
@@ -95,7 +95,7 @@ $secondary-color: darken($primary-color, 10%);
       margin-top: 4rem;
       margin-bottom: 3rem;
       width: 80%;
-      .statistic {        
+      .statistic {
         width: 220px;
         height: 80px;
         margin-bottom: 30px;

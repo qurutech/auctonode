@@ -14,7 +14,7 @@ $primary-color: #E21250;
 $secondary-color: darken($primary-color, 10%);
 .dashboard {
     font-family: 'Share Tech', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     background-color: $secondary-color;
     margin: 0;
     display: flex;

@@ -7,14 +7,14 @@
             <input type="text"  placeholder="Search AuctoNode Owners" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
-            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
-            <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
-        </section>
-        <section class="login" style="margin-right: -60px">
             <router-link to="/dashboard" class="login__btn" v-if="isLoggedIn">Dashboard</router-link>
         </section>
-        <section class="login">
+        <section class="login" style="margin-right: -60px">
             <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
+        </section>
+        <section class="login">
+            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
+            <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
         </section>
         <section class="mobile-nav">
             <ul class="mobile-nav-list">
@@ -162,6 +162,7 @@ nav {
             width: 100%;
 
             .mobile-nav-item {
+
                 a {
                     color: black;
                 }
