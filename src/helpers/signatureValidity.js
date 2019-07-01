@@ -29,14 +29,14 @@ function authValidate(data, sign, publicKey) {
         function (bytes) {
         return crypto.isValidSignature(bytes, sign, publicKey)
         });
-};
+}
 
 function addressValidate(publicKey, address) {
     var publicKeyBytes = base58.decode(publicKey);
     var addressFromPublicKey = crypto.buildRawAddress(publicKeyBytes);
 
     return (addressFromPublicKey == address);
-};
+}
 
 // //Signed data from example link
 // var signedData = {

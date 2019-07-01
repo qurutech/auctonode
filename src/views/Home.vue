@@ -15,11 +15,11 @@
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Shared Revenue:</h2>
-          <p class="statistic__stat">45.849 WAVES</p>
+          <p class="statistic__stat">51.249 WAVES</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Next Payout:</h2>
-          <p class="statistic__stat">JUNE</p>
+          <p class="statistic__stat">JULY</p>
 
         </section>
       </section>
@@ -40,7 +40,10 @@
               <p class="item__content">{{ auct.quantity | currency(' ')}} Auct Token</p>
             </section>
 
-            <p class="kyi-status">Unverified</p>
+            <p class="kyi-status">
+              <span v-if="auct.status == 'Verified'"><i class="fa fa-certificate"></i></span>
+              {{ auct.status }}
+            </p>
 
             <router-link :to="'vote/' + auct.address" class="vote">Vote</router-link>
 
@@ -53,7 +56,9 @@
                 <p class="quantity">{{ auct.quantity | currency(' ')}} Auct Token</p>
 
                 <section class="mobile-auctonode__footer">
-                  <p class="kyc-status">Unverified</p>
+                  <p class="kyc-status">
+                    <span v-if="auct.status == 'Verified'"><i class="fa fa-certificate"></i></span>
+                    {{ auct.status }}</p>
                   <p>
                     <a href="" class="mobile-vote">Vote</a>
                   </p>
@@ -102,7 +107,8 @@ export default {
       auctArray: [],
       filteredAuctArray: [],
       randomString: '',
-      totalStakedAuct: 0
+      totalStakedAuct: 0,
+      verifiedAccounts: ["3PFrT13RvswumoM2UyvdLMt8g48xvsYNn7x", "3PN24XrdwviNRMA6XYqByQehzztkNRd9SAR", "3P4QGiLzqgT78FxJETT8Mpeeo6XYpA3NZGi", "3PP6xS1gT8sRaiPjxLT8hFYHRJQdkjBTrax", "3P753twEWYXBVSB9VmfQKS7oTocHDfirEdT", "3P5P3HoTTiYjoJAyRRez6mpXG9iyxtHWyRd", "3P3432nUrDSNKNAP5a4uSPEFAb9zvrb2s42", "3PBwmY7U6YwDjb22jC4fWfCnNyuuTECTQs4", "3PCkhxGNbT1CwSmHLw6g2zYk6QqZ51bVXyo", "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG"]
     }
   },
   computed: mapState(['isLoggedIn']),
@@ -111,19 +117,26 @@ export default {
     getAuctoNodeOwners: function() {
       fetch(`https://nodes.wavesnodes.com/assets/${this.assetID}/distribution`).then(response => response.json())
       .then((response) =>{
+
         this.auct = response;
+
+        // Iterating on the return object of objects to structure into an array of objects instead
         for (let [key, value] of Object.entries(this.auct)) {
             let arrayEntry = {
               address: key,
               quantity: value / 100000000,
+              status: this.verifiedAccounts.includes(key) ? "Verified" : "Unverified"
             }
             this.auctArray.push(arrayEntry)
         }
 
+
+        // Filtering to only get Auctonode owners
         this.filteredAuctArray = this.auctArray.filter((auct) => {
           return auct.quantity >= 1000000
         }).sort(function(a, b){return b.quantity-a.quantity})
 
+        // Removing Auctionlance Waves Address and Adding all quantity to get the total staked Auct Token
         this.totalStakedAuct = this.filteredAuctArray.filter(auct => auct.address !== '3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG').reduce((total, auct) => {
           return total + auct.quantity
         }, 0)
@@ -337,6 +350,7 @@ export default {
       margin-top: 0;
       align-self: flex-start;
       text-decoration: none;
+      box-sizing: border-box;
     }
     @media screen and (max-width: 767px) {
       .kyi-status, .vote {
