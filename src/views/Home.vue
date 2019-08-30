@@ -108,7 +108,7 @@ export default {
       filteredAuctArray: [],
       randomString: '',
       totalStakedAuct: 0,
-      verifiedAccounts: ["3PFrT13RvswumoM2UyvdLMt8g48xvsYNn7x", "3PN24XrdwviNRMA6XYqByQehzztkNRd9SAR", "3P4QGiLzqgT78FxJETT8Mpeeo6XYpA3NZGi", "3PP6xS1gT8sRaiPjxLT8hFYHRJQdkjBTrax", "3P753twEWYXBVSB9VmfQKS7oTocHDfirEdT", "3P5P3HoTTiYjoJAyRRez6mpXG9iyxtHWyRd", "3P3432nUrDSNKNAP5a4uSPEFAb9zvrb2s42", "3PBwmY7U6YwDjb22jC4fWfCnNyuuTECTQs4", "3PCkhxGNbT1CwSmHLw6g2zYk6QqZ51bVXyo", "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG"]
+      verifiedAccounts: ["3PFrT13RvswumoM2UyvdLMt8g48xvsYNn7x", "3PN24XrdwviNRMA6XYqByQehzztkNRd9SAR", "3P4QGiLzqgT78FxJETT8Mpeeo6XYpA3NZGi", "3PP6xS1gT8sRaiPjxLT8hFYHRJQdkjBTrax", "3P753twEWYXBVSB9VmfQKS7oTocHDfirEdT", "3P5P3HoTTiYjoJAyRRez6mpXG9iyxtHWyRd", "3P3432nUrDSNKNAP5a4uSPEFAb9zvrb2s42", "3PBwmY7U6YwDjb22jC4fWfCnNyuuTECTQs4", "3PCkhxGNbT1CwSmHLw6g2zYk6QqZ51bVXyo", "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG", "3PPCzX2doZ7agBNuGSKqjrbdXgGEtE7CpQ3"]
     }
   },
   computed: mapState(['isLoggedIn']),
