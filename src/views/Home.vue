@@ -15,11 +15,11 @@
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Shared Revenue:</h2>
-          <p class="statistic__stat">137.639 WAVES</p>
+          <p class="statistic__stat">172.639 WAVES</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Next Payout:</h2>
-          <p class="statistic__stat">OCTOBER</p>
+          <p class="statistic__stat">NOVEMBER</p>
 
         </section>
       </section>
