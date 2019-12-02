@@ -15,11 +15,11 @@
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Shared Revenue:</h2>
-          <p class="statistic__stat">172.639 WAVES</p>
+          <p class="statistic__stat">{{sharedRevenue}} WAVES</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Next Payout:</h2>
-          <p class="statistic__stat">NOVEMBER</p>
+          <p class="statistic__stat">{{getCurrentMonth() | uppercase}}</p>
 
         </section>
       </section>
@@ -69,7 +69,7 @@
       </section>
       <footer>
         <section>
-          <h3 class="footer">AuctoNode &copy; 2019</h3> <br>
+          <h3 class="footer">AuctoNode &copy; {{ getCurrentYear() }}</h3> <br>
           <ul>
             <li><a href="https://t.me/auctionlance"><i class="fas fa-futbol"></i> Need help?</a></li>
             <li><a href="https://www.auctionlance.com"><i class="fas fa-globe"></i> Our Website</a></li>
@@ -111,7 +111,12 @@ export default {
       verifiedAccounts: ["3PFrT13RvswumoM2UyvdLMt8g48xvsYNn7x", "3PN24XrdwviNRMA6XYqByQehzztkNRd9SAR", "3P4QGiLzqgT78FxJETT8Mpeeo6XYpA3NZGi", "3PP6xS1gT8sRaiPjxLT8hFYHRJQdkjBTrax", "3P753twEWYXBVSB9VmfQKS7oTocHDfirEdT", "3P5P3HoTTiYjoJAyRRez6mpXG9iyxtHWyRd", "3P3432nUrDSNKNAP5a4uSPEFAb9zvrb2s42", "3PBwmY7U6YwDjb22jC4fWfCnNyuuTECTQs4", "3PCkhxGNbT1CwSmHLw6g2zYk6QqZ51bVXyo", "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG", "3PPCzX2doZ7agBNuGSKqjrbdXgGEtE7CpQ3"]
     }
   },
-  computed: mapState(['isLoggedIn']),
+  computed: {
+    ...mapState(['isLoggedIn']),
+    sharedRevenue() {
+      return 172.639 + 35
+    }
+  },
   methods: {
     ...mapActions(['login']),
     getAuctoNodeOwners: function() {
@@ -190,7 +195,16 @@ export default {
     },
     generateRandomString() {
       this.randomString = random();
-    }
+    },
+    getCurrentMonth() {
+      var months  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var now  = new Date();
+      return months[now.getMonth()];
+    },
+    getCurrentYear() {
+      var now = new Date();
+      return now.getFullYear()
+    },
   },
   components: {
     AuctoNodeNavbar,
