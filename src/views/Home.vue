@@ -114,7 +114,7 @@ export default {
   computed: {
     ...mapState(['isLoggedIn']),
     sharedRevenue() {
-      return 172.639 + 35
+      return 279.135
     }
   },
   methods: {
