@@ -7,14 +7,13 @@
             <input type="text"  placeholder="Search AuctoNode Owners" class="search__box"/>
         </section>
         <section class="login" style="margin-right: -60px">
-            <router-link to="/dashboard" class="login__btn" v-if="isLoggedIn">Dashboard</router-link>
-        </section>
-        <section class="login" style="margin-right: -60px">
             <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
         </section>
-        <section class="login">
-            <a :href="authUrlString" class="login__btn" v-if="!isLoggedIn">Login</a>
-            <a href="" @click.prevent="logoutOwner" class="login__btn" v-if="isLoggedIn">Log Out</a>
+        <section class="login" style="margin-right: -60px">
+            <router-link to="/auctoboard" class="login__btn" v-if="isLoggedIn">Auctoboard</router-link>
+        </section>
+        <section class="login" v-if="!isLoggedIn">
+            <a href="#" @click.prevent="performWavesKeeperLogin" class="login__btn">Login</a>
         </section>
         <section class="mobile-nav">
             <ul class="mobile-nav-list">
@@ -28,7 +27,7 @@
                     <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="mobile__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
                 </li>
                 <li class="mobile-nav-item">
-                    <a :href="authUrlString" class="mobile__btn" v-if="!isLoggedIn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#" @click.prevent="performWavesKeeperLogin" class="mobile__btn" v-if="!isLoggedIn"><i class="fas fa-sign-in-alt"></i> Login</a>
                 </li>
 
                 <li class="mobile-nav-item">
@@ -43,27 +42,9 @@
 import { mapState, mapActions } from 'vuex'
 export default {
     name: 'AuctoNodeNavbar',
-    props: ['randomString'],
-    data() {
-        return {
-            authUrlString: '',
-            auth: {
-                basicPath: 'https://client.wavesplatform.com#gateway/auth',
-                referrer: '?r=https://auctonode.herokuapp.com',
-                name: '&n=AuctoNode',
-                iconPath: '&i=https://wavesmania.net/images/aucttoken.png',
-                debug: '&debug=true'
-
-            }
-        }
-    },
-    computed: mapState(['isLoggedIn']),
+    computed: mapState(['isLoggedIn', 'auctAssetId']),
     methods: {
-        ...mapActions(['logout']),
-        generateRandom() {
-            this.auth.data = '&d=' + this.randomString;
-            this.authUrlString = `${this.auth.basicPath}${this.auth.referrer}${this.auth.name}${this.auth.data}${this.auth.iconPath}${this.auth.debug}`
-        },
+        ...mapActions(['logout', 'performWavesKeeperLogin']),
         logoutOwner() {
             this.logout()
             this.$toasted.show(
@@ -74,10 +55,6 @@ export default {
                 }
             )
         }
-    },
-    created() {
-        this.generateRandom();
-        // console.log(this.randomString);
     }
 }
 </script>

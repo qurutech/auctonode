@@ -15,12 +15,12 @@ export const router =  new Router({
       component: Home
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
+      path: '/auctoboard',
+      name: 'auctoboard',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue')
+      component: () => import(/* webpackChunkName: "dashboard" */ './views/Auctoboard.vue')
     },
     {
       path: '/vote/:address',
@@ -29,6 +29,14 @@ export const router =  new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "vote" */ './views/Vote.vue')
+    },
+    {
+      path: '/payout/:address',
+      name: 'payout',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "vote" */ './views/Payout.vue')
     },
     // {
     //   path: '/authorize',

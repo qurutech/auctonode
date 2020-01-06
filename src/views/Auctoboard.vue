@@ -26,7 +26,7 @@
               </section>
           </section>
           <section class="welcome">
-            <p>Welcome, {{userAddress}}</p>
+            <p>Welcome, {{currentLoggedInUser.address}}</p>
           </section>
           <section class="voting-history">
             <h3>Voting History</h3>
@@ -48,7 +48,7 @@ export default {
       auctBalance: 0
     }
   },
-  computed: mapState(['userAddress', 'auctAddressId']),
+  computed: mapState(['currentLoggedInUser', 'auctAddressId']),
   components: {
     sidebarNav,
     dashboardLayout
@@ -65,12 +65,12 @@ export default {
       })
     },
     fetchCurrentWavesBalance() {
-      fetch(`https://nodes.wavesplatform.com/addresses/balance/${this.userAddress}`)
+      fetch(`https://nodes.wavesplatform.com/addresses/balance/${this.currentLoggedInUser.address}`)
       .then(response => response.json())
       .then(response => this.wavesBalance = response.balance / 100000000)
     },
     fetchCurrentAuctBalance() {
-      fetch(`https://nodes.wavesplatform.com/assets/balance/${this.userAddress}/${this.auctAddressId}`)
+      fetch(`https://nodes.wavesplatform.com/assets/balance/${this.currentLoggedInUser.address}/${this.auctAddressId}`)
       .then(response => response.json())
       .then(response => this.auctBalance = response.balance / 100000000)
     }

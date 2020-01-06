@@ -2,8 +2,9 @@
     <section class="sidebar">
     <nav class="sidebar__nav">
     <ul class="sidebar__nav-items">
-        <li class="sidebar__nav-item"><router-link to="/dashboard" :class="{'active': isActive == 1}"><i class="fas fa-home"></i> Overview</router-link></li>
-        <li class="sidebar__nav-item"><router-link :to="'vote/' + userAddress" :class="{'active': isActive == 2}"><i class="fas fa-thumbs-up"></i> Vote</router-link></li>
+        <li class="sidebar__nav-item"><router-link to="/auctoboard" :class="{'active': isActive == 1}"><i class="fas fa-home"></i> Overview</router-link></li>
+        <li class="sidebar__nav-item"><router-link :to="'/vote/' + currentLoggedInUser.address" :class="{'active': isActive == 2}"><i class="fas fa-thumbs-up"></i> Vote</router-link></li>
+        <li class="sidebar__nav-item"><router-link :to="'/payout/' + currentLoggedInUser.address" :class="{'active': isActive == 3}"><i class="fas fa-coins"></i> Payout </router-link></li>
         <li class="sidebar__nav-item"><router-link to="/" ><i class="fas fa-igloo"></i> Go Back Home</router-link></li>
         <li class="sidebar__nav-item"><a href="" @click.prevent="logoutOwner"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
@@ -15,7 +16,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'sidebarNav',
     props: ['isActive'],
-    computed: mapState(['userAddress']),
+    computed: mapState(['currentLoggedInUser']),
     methods: {
         ...mapActions(['logout']),
         logoutOwner() {

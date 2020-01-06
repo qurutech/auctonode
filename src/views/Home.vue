@@ -1,17 +1,17 @@
 <template>
   <section class="home">
-    <aucto-node-navbar :randomString="randomString" />
+    <aucto-node-navbar />
     <main class="aucto-owners">
       <h1 class="section-heading"><i class="fas fa-bolt icon"></i> Network Status: <span class="icon">Active</span></h1>
 
       <section class="statistics">
         <section class="statistic">
           <h2 class="statistic__title">Total AuctoNodes:</h2>
-          <p class="statistic__stat" v-if="filteredAuctArray.length > 0">{{filteredAuctArray.length - 1}}</p>
+          <p class="statistic__stat">{{ auctoNodeOwnersCount }}</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Staked Auct Token:</h2>
-          <p class="statistic__stat">{{totalStakedAuct | currency(' ')}}</p>
+          <p class="statistic__stat">{{ totalStakedAuctTokens | currency(' ')}}</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Shared Revenue:</h2>
@@ -32,9 +32,9 @@
           <h2 class="header__title">Quantity</h2>
           <h2 class="header__title" id="kyc-status">KYC Status</h2>
         </section>
-        <section v-if="filteredAuctArray.length == 0" class="loading">AuctoNode is fetching owners. Please wait..</section>
+        <section v-if="!auctoNodeOwners.length" class="loading">AuctoNode is fetching owners. Please wait..</section>
         <section class="body" else>
-          <section v-for="(auct, index) in filteredAuctArray" :key="index" class="items">
+          <section v-for="(auct, index) in auctoNodeOwners" :key="index" class="items">
             <section class="item">
               <p class="item__content"><a :href="'https://wavesexplorer.com/address/' + auct.address" target="_blank">{{auct.address | truncate(30)}}</a></p>
               <p class="item__content">{{ auct.quantity | currency(' ')}} Auct Token</p>
@@ -50,7 +50,7 @@
           </section>
         </section>
         <section class="mobile-auctonode" else>
-          <section class="mobile-card" v-for="(auct, index) in filteredAuctArray" :key="index">
+          <section class="mobile-card" v-for="(auct, index) in auctoNodeOwners" :key="index">
               <section>
                 <p class="address"><a :href="'https://wavesexplorer.com/address/' + auct.address" target="_blank">{{auct.address | truncate(30)}}</a></p>
                 <p class="quantity">{{ auct.quantity | currency(' ')}} Auct Token</p>
@@ -93,109 +93,18 @@
 <script>
 // @ is an alias to /src
 import AuctoNodeNavbar from "@/components/navbar";
-import getQueryVariable from "@/helpers/getQueryVariable";
-import addressExist from "@/helpers/addressExist";
-import {validate} from "@/helpers"
-import {mapActions, mapState} from 'vuex';
-import random from '@/helpers/random';
+import {mapActions, mapState, mapGetters } from 'vuex';
 export default {
   name: 'home',
-  data() {
-    return {
-      assetID: "53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh",
-      auctAsset: '',
-      auctArray: [],
-      filteredAuctArray: [],
-      randomString: '',
-      totalStakedAuct: 0,
-      verifiedAccounts: ["3PFrT13RvswumoM2UyvdLMt8g48xvsYNn7x", "3PN24XrdwviNRMA6XYqByQehzztkNRd9SAR", "3P4QGiLzqgT78FxJETT8Mpeeo6XYpA3NZGi", "3PP6xS1gT8sRaiPjxLT8hFYHRJQdkjBTrax", "3P753twEWYXBVSB9VmfQKS7oTocHDfirEdT", "3P5P3HoTTiYjoJAyRRez6mpXG9iyxtHWyRd", "3P3432nUrDSNKNAP5a4uSPEFAb9zvrb2s42", "3PBwmY7U6YwDjb22jC4fWfCnNyuuTECTQs4", "3PCkhxGNbT1CwSmHLw6g2zYk6QqZ51bVXyo", "3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG", "3PPCzX2doZ7agBNuGSKqjrbdXgGEtE7CpQ3"]
-    }
-  },
   computed: {
-    ...mapState(['isLoggedIn']),
+    ...mapState(['isLoggedIn', 'totalStakedAuctTokens', 'auctoNodeOwners']),
+    ...mapGetters(['auctoNodeOwnersCount']),
     sharedRevenue() {
       return 279.135
     }
   },
   methods: {
-    ...mapActions(['login']),
-    getAuctoNodeOwners: function() {
-      fetch(`https://nodes.wavesnodes.com/assets/${this.assetID}/distribution`).then(response => response.json())
-      .then((response) =>{
-
-        this.auct = response;
-
-        // Iterating on the return object of objects to structure into an array of objects instead
-        for (let [key, value] of Object.entries(this.auct)) {
-            let arrayEntry = {
-              address: key,
-              quantity: value / 100000000,
-              status: this.verifiedAccounts.includes(key) ? "Verified" : "Unverified"
-            }
-            this.auctArray.push(arrayEntry)
-        }
-
-
-        // Filtering to only get Auctonode owners
-        this.filteredAuctArray = this.auctArray.filter((auct) => {
-          return auct.quantity >= 1000000
-        }).sort(function(a, b){return b.quantity-a.quantity})
-
-        // Removing Auctionlance Waves Address and Adding all quantity to get the total staked Auct Token
-        this.totalStakedAuct = this.filteredAuctArray.filter(auct => auct.address !== '3P7H2Zqt4NK3J5Q2wF8gjcLw9187gC1bbAG').reduce((total, auct) => {
-          return total + auct.quantity
-        }, 0)
-
-        if (getQueryVariable("a") && getQueryVariable("p")) {
-          const isAddress = addressExist(this.filteredAuctArray, getQueryVariable("a"));
-          const addressIsValid = validate.addressValidate(getQueryVariable("p"), getQueryVariable("a"))
-
-          const signedData = {
-            host: 'https://auctonode.herokuapp.com/',
-            data: this.randomString
-          }
-
-          let signatureCheck = validate.authValidate(signedData, getQueryVariable("s"), getQueryVariable("p"));
-
-          signatureCheck.then(result => {
-            if(result === false) {
-              this.$toasted.error(
-              "Signature is not valid",{
-                icon : {
-                  name: "fa-exclamation-circle"
-                }
-              }
-              );
-              return;
-            }
-          })
-          if (isAddress && addressIsValid) {
-            this.login();
-            localStorage.setItem("userAddress", JSON.stringify(getQueryVariable("a")));
-          } else if(!addressIsValid) {
-            this.$toasted.error(
-              "Address does not match public key - address swapping detected",{
-                icon : {
-                  name: "fa-exclamation-circle"
-                }
-              }
-              );
-          }
-          else {
-            this.$toasted.error(
-              "Only AuctoNode Owners can login at this moment",{
-                icon : {
-                  name: "fa-exclamation-circle"
-                }
-              }
-              );
-          }
-        }
-      })
-    },
-    generateRandomString() {
-      this.randomString = random();
-    },
+    ...mapActions(['login', 'getAuctoNodeOwners']),
     getCurrentMonth() {
       var months  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       var now  = new Date();
@@ -211,8 +120,6 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
-    this.generateRandomString()
-
   }
 }
 </script>
