@@ -61,7 +61,7 @@ export default new Vuex.Store({
               localStorage.setItem('isLoggedIn', true)
             })
             .catch((error) => {
-              console.log(error.message)
+              this.$toasted.error(error.message)
             })
         } catch (_) {
           context.commit('UPDATE_LOGIN_STATE', 'LOG_IN_FAIL')

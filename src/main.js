@@ -7,6 +7,7 @@ import { router } from './router';
 import store from './store';
 import './registerServiceWorker';
 
+
 Vue.config.productionTip = false;
 Vue.use(Toasted, {
   iconPack: 'fontawesome',
@@ -17,6 +18,7 @@ Vue.use(Toasted, {
 
 Vue.use(Vue2Filters);
 Vue.use(VueClipboard);
+
 new Vue({
   router,
   store,

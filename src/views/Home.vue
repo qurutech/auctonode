@@ -100,7 +100,7 @@ export default {
     ...mapState(['isLoggedIn', 'totalStakedAuctTokens', 'auctoNodeOwners']),
     ...mapGetters(['auctoNodeOwnersCount']),
     sharedRevenue() {
-      return 279.135
+      return 279.135 + 51
     }
   },
   methods: {
