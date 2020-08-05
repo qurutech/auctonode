@@ -1,5 +1,6 @@
 # Auctonode
-Auctonode is a rich list tracking tool for Waves based assets.
+Auctonode is a rich list tracking tool for Waves based assets. It lets project owners track holders of their asset based on Waves Protocol using asset unique ID.
+See [Live version here](https://auctonode.auctionlance.com).
 
 ## Project setup
 ```
