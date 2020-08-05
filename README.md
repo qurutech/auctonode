@@ -1,4 +1,5 @@
-# auctonode
+# Auctonode
+Auctonode is a rich list tracking tool for Waves based assets.
 
 ## Project setup
 ```
