@@ -60,11 +60,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 ::placeholder {
-    color: lighten(#F5E23A, 25%);
+    color: lighten(#E27B36, 25%);
 }
 nav {
     font-family: 'Share Tech', sans-serif;
-    $primary-color: #1D1E4A;
+    $primary-color: #E21250;
     $secondary-color: darken($primary-color, 10%);
     display: flex;
     justify-content: space-evenly;
@@ -83,7 +83,7 @@ nav {
         }
     }
     a {
-        color: lighten(#F5E23A, 25%);
+        color: lighten(#E27B36, 25%);
         text-decoration: none;
     }
 
@@ -93,7 +93,7 @@ nav {
         background: $secondary-color;
         border-radius: 5rem;
         width: 400px;
-        color: lighten(#F5E23A, 25%);
+        color: lighten(#E27B36, 25%);
 
         @media screen and (max-width: 767px) {
         & {
@@ -153,7 +153,7 @@ nav {
             display: flex;
             position: fixed;
             bottom: 0;
-            background-color: lighten(#F5E23A, 25%);
+            background-color: lighten(#E27B36, 25%);
             left: 0;
             right: 0;
             width: 100%;
