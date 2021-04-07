@@ -198,7 +198,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #e21250;
+$primary-color: #1B1E4A;
 $secondary-color: darken($primary-color, 10%);
 main {
   font-family: "Share Tech", sans-serif;
@@ -338,7 +338,7 @@ main {
 .kyi-status,
 .vote,
 .loading {
-  background-color: lighten(#e27b36, 25%);
+  background-color: lighten(#fff, 8%);
   padding: 1rem 2rem;
   color: $secondary-color;
   border-radius: 4px;
