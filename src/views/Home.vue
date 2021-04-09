@@ -9,7 +9,7 @@
 
       <section class="statistics">
         <section class="statistic">
-          <h2 class="statistic__title">Total AuctoNodes:</h2>
+          <h2 class="statistic__title">Total Stakers:</h2>
           <p class="statistic__stat">{{ auctoNodeOwnersCount }}</p>
         </section>
         <section class="statistic">
