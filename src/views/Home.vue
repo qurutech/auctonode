@@ -3,7 +3,7 @@
     <aucto-node-navbar />
     <main class="aucto-owners">
       <h1 class="section-heading">
-        <i class="fas fa-bolt icon"></i> Network Status:
+        <i class="fas fa-bolt icon"></i> Staking Status:
         <span class="icon">Active</span>
       </h1>
 
