@@ -13,15 +13,15 @@
           <p class="statistic__stat">{{ auctoNodeOwnersCount }}</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Staked Auct Token:</h2>
+          <h2 class="statistic__title">Total Dyzrupt Staked:</h2>
           <p class="statistic__stat">{{ totalStakedAuctTokens | currency(' ')}}</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Shared Revenue:</h2>
+          <h2 class="statistic__title">Total Dyzrupt Payout:</h2>
           <p class="statistic__stat">{{sharedRevenue}} WAVES</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Next Payout:</h2>
+          <h2 class="statistic__title">Available Dyzrupt Reward:</h2>
           <p class="statistic__stat">{{getCurrentMonth() | uppercase}}</p>
         </section>
       </section>
