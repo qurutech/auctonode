@@ -3,9 +3,6 @@
         <section class="brand">
             <h3><router-link to="/" class="brand__link">AuctoNode</router-link></h3>
         </section>
-        <section class="search">
-            <input type="text"  placeholder="Search AuctoNode Owners" class="search__box"/>
-        </section>
         <section class="login" style="margin-right: -60px">
             <a href="https://client.wavesplatform.com/dex?assetId1=WAVES&assetId2=53VHGAEfVNJnByeMbu9r4DsxXoBz3TecQfWpYXAsZmzh" target="_blank" class="login__btn"><i class="fas fa-coins"></i> Buy Auct Token</a>
         </section>
@@ -64,7 +61,7 @@ export default {
 }
 nav {
     font-family: 'Share Tech', sans-serif;
-    $primary-color: #1D1E4A;
+    $primary-color: #372145;
     $secondary-color: darken($primary-color, 10%);
     display: flex;
     justify-content: space-evenly;
