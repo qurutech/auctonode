@@ -58,7 +58,6 @@
               {{ auct.status }}
             </p>
 
-            <router-link :to="'vote/' + auct.address" class="vote">Vote</router-link>
           </section>
         </section>
         <section class="mobile-auctonode" else>
@@ -79,9 +78,6 @@
                   </span>
                   {{ auct.status }}
                 </p>
-                <p>
-                  <a href class="mobile-vote">Vote</a>
-                </p>
               </section>
             </section>
           </section>
@@ -93,18 +89,18 @@
           <br />
           <ul>
             <li>
-              <a href="https://t.me/auctionlance">
+              <a href="https://t.me/dyzchat">
                 <i class="fas fa-futbol"></i> Need help?
               </a>
             </li>
             <li>
-              <a href="https://www.auctionlance.com">
+              <a href="https://dyzrupt.ltd/">
                 <i class="fas fa-globe"></i> Our Website
               </a>
             </li>
             <li>
               <a
-                href="https://forum.wavesplatform.com/t/auctionlance-platform-hire-and-pay-freelancers-with-crypto/10850"
+                href="https://dyzrupt.medium.com/"
               >
                 <i class="fas fa-question-circle"></i> How It Works
               </a>
@@ -114,17 +110,17 @@
         <section>
           <ul class="social">
             <li>
-              <a href="https://t.me/auctionlance">
+              <a href="https://t.me/dyzchat">
                 <i class="fab fa-telegram"></i>
               </a>
             </li>
             <li>
-              <a href="https://facebook.com/auctionlance">
+              <a href="https://facebook.com/dyzrupt">
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/aucttoken">
+              <a href="https://twitter.com/dyzrupt">
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
@@ -246,7 +242,7 @@ main {
     justify-content: space-evenly;
     flex-direction: row;
     margin-bottom: 2rem !important;
-    width: 60%;
+    width: 50%;
     background-color: $primary-color;
     border-radius: 5rem;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0, 0, 0, 0.75);
