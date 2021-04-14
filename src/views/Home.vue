@@ -14,15 +14,15 @@
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Total Dyzrupt Staked:</h2>
-          <p class="statistic__stat">{{ totalStakedAuctTokens | currency(' ')}}</p>
+          <p class="statistic__stat">{{ staked | currency(' ')}}</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Total Dyzrupt Payout:</h2>
-          <p class="statistic__stat">{{sharedRevenue}} WAVES</p>
+          <p class="statistic__stat">{{sharedRevenue  | currency(' ')}} WAVES</p>
         </section>
         <section class="statistic">
           <h2 class="statistic__title">Available Dyzrupt Reward:</h2>
-          <p class="statistic__stat">{{getCurrentMonth() | uppercase}}</p>
+          <p class="statistic__stat">{{reward}}</p>
         </section>
       </section>
 
@@ -147,6 +147,14 @@ import AuctoNodeNavbar from "@/components/navbar";
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "home",
+  data(){
+    return{
+      sharedRevenue:0,
+      staked:0,
+      reward:0
+    }
+
+  },
   computed: {
     ...mapState([
       "isLoggedIn",
@@ -155,9 +163,6 @@ export default {
       "auctTokenHolders"
     ]),
     ...mapGetters(["auctoNodeOwnersCount"]),
-    sharedRevenue() {
-      return 279.135 + 51;
-    }
   },
   methods: {
     ...mapActions(["login", "getAuctoNodeOwners"]),
@@ -189,6 +194,21 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
+  },
+ async mounted(){
+      const res = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=claimed_total')
+      const data = await res.json()
+      this.sharedRevenue = data[0].value;
+
+       const resStaked = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?matches=total_staked_amount')
+      const dataStaked = await resStaked.json()
+      this.staked = dataStaked[0].value;
+
+       const resReward = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=stake_pool')
+      const dataReward = await resReward.json()
+      this.reward = dataReward[0].value /100000000;
+
+
   }
 };
 </script>
@@ -289,7 +309,7 @@ main {
       margin-left: 0.5rem;
     }
 
-    width: 220px;
+    width: 230px;
     height: 129px;
     margin-bottom: 30px;
     border-radius: 8px;
