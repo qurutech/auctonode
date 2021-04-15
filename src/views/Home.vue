@@ -198,11 +198,11 @@ export default {
  async mounted(){
       const res = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=claimed_total')
       const data = await res.json()
-      this.sharedRevenue = data[0].value;
+      this.sharedRevenue = data[0].value /100000000;
 
        const resStaked = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?matches=total_staked_amount')
       const dataStaked = await resStaked.json()
-      this.staked = dataStaked[0].value;
+      this.staked = dataStaked[0].value /100000000;
 
        const resReward = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=stake_pool')
       const dataReward = await resReward.json()
