@@ -85,7 +85,7 @@
       </section>
       <footer>
         <section>
-          <h3 class="footer">AuctoNode &copy; {{ getCurrentYear() }}</h3>
+          <h3 class="footer">Dyznode &copy; {{ getCurrentYear() }}</h3>
           <br />
           <ul>
             <li>
