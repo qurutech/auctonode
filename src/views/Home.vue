@@ -3,26 +3,26 @@
     <aucto-node-navbar />
     <main class="aucto-owners">
       <h1 class="section-heading">
-        <i class="fas fa-bolt icon"></i> Staking Status:
+        <i class="fas fa-bolt icon"></i> Network Status:
         <span class="icon">Active</span>
       </h1>
 
       <section class="statistics">
         <section class="statistic">
-          <h2 class="statistic__title">Total Stakers:</h2>
+          <h2 class="statistic__title">Total AuctoNodes:</h2>
           <p class="statistic__stat">{{ auctoNodeOwnersCount }}</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Total Dyzrupt Staked:</h2>
-          <p class="statistic__stat">{{ staked | currency(' ')}}</p>
+          <h2 class="statistic__title">Staked Auct Token:</h2>
+          <p class="statistic__stat">{{ totalStakedAuctTokens | currency(' ')}}</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Total Dyzrupt Payout:</h2>
-          <p class="statistic__stat">{{sharedRevenue  | currency(' ')}} WAVES</p>
+          <h2 class="statistic__title">Shared Revenue:</h2>
+          <p class="statistic__stat">{{sharedRevenue}} WAVES</p>
         </section>
         <section class="statistic">
-          <h2 class="statistic__title">Available Dyzrupt Reward:</h2>
-          <p class="statistic__stat">{{reward}}</p>
+          <h2 class="statistic__title">Next Payout:</h2>
+          <p class="statistic__stat">{{getCurrentMonth() | uppercase}}</p>
         </section>
       </section>
 
@@ -58,6 +58,7 @@
               {{ auct.status }}
             </p>
 
+            <router-link :to="'vote/' + auct.address" class="vote">Vote</router-link>
           </section>
         </section>
         <section class="mobile-auctonode" else>
@@ -78,6 +79,9 @@
                   </span>
                   {{ auct.status }}
                 </p>
+                <p>
+                  <a href class="mobile-vote">Vote</a>
+                </p>
               </section>
             </section>
           </section>
@@ -85,22 +89,22 @@
       </section>
       <footer>
         <section>
-          <h3 class="footer">Dyznode &copy; {{ getCurrentYear() }}</h3>
+          <h3 class="footer">AuctoNode &copy; {{ getCurrentYear() }}</h3>
           <br />
           <ul>
             <li>
-              <a href="https://t.me/dyzchat">
+              <a href="https://t.me/auctionlance">
                 <i class="fas fa-futbol"></i> Need help?
               </a>
             </li>
             <li>
-              <a href="https://dyzrupt.ltd/">
+              <a href="https://www.auctionlance.com">
                 <i class="fas fa-globe"></i> Our Website
               </a>
             </li>
             <li>
               <a
-                href="https://dyzrupt.medium.com/"
+                href="https://forum.wavesplatform.com/t/auctionlance-platform-hire-and-pay-freelancers-with-crypto/10850"
               >
                 <i class="fas fa-question-circle"></i> How It Works
               </a>
@@ -110,17 +114,17 @@
         <section>
           <ul class="social">
             <li>
-              <a href="https://t.me/dyzchat">
+              <a href="https://t.me/auctionlance">
                 <i class="fab fa-telegram"></i>
               </a>
             </li>
             <li>
-              <a href="https://facebook.com/dyzrupt">
+              <a href="https://facebook.com/auctionlance">
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/dyzrupt">
+              <a href="https://twitter.com/aucttoken">
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
@@ -147,14 +151,6 @@ import AuctoNodeNavbar from "@/components/navbar";
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "home",
-  data(){
-    return{
-      sharedRevenue:0,
-      staked:0,
-      reward:0
-    }
-
-  },
   computed: {
     ...mapState([
       "isLoggedIn",
@@ -163,6 +159,9 @@ export default {
       "auctTokenHolders"
     ]),
     ...mapGetters(["auctoNodeOwnersCount"]),
+    sharedRevenue() {
+      return 279.135 + 51;
+    }
   },
   methods: {
     ...mapActions(["login", "getAuctoNodeOwners"]),
@@ -194,27 +193,12 @@ export default {
   },
   created() {
     this.getAuctoNodeOwners();
-  },
- async mounted(){
-      const res = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=claimed_total')
-      const data = await res.json()
-      this.sharedRevenue = data[0].value /100000000;
-
-       const resStaked = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?matches=total_staked_amount')
-      const dataStaked = await resStaked.json()
-      this.staked = dataStaked[0].value /100000000;
-
-       const resReward = await fetch('https://nodes.waves.exchange/addresses/data/3PPiE3H2Xrd1e5cqEs39ezVDMtRWcgJ1HgN?key=stake_pool')
-      const dataReward = await resReward.json()
-      this.reward = dataReward[0].value /100000000;
-
-
   }
 };
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #372145;
+$primary-color: #e21250;
 $secondary-color: darken($primary-color, 10%);
 main {
   font-family: "Share Tech", sans-serif;
@@ -262,7 +246,7 @@ main {
     justify-content: space-evenly;
     flex-direction: row;
     margin-bottom: 2rem !important;
-    width: 50%;
+    width: 60%;
     background-color: $primary-color;
     border-radius: 5rem;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0, 0, 0, 0.75);
@@ -309,7 +293,7 @@ main {
       margin-left: 0.5rem;
     }
 
-    width: 230px;
+    width: 220px;
     height: 129px;
     margin-bottom: 30px;
     border-radius: 8px;
@@ -354,7 +338,7 @@ main {
 .kyi-status,
 .vote,
 .loading {
-  background-color: lighten(#fff, 25%);
+  background-color: lighten(#e27b36, 25%);
   padding: 1rem 2rem;
   color: $secondary-color;
   border-radius: 4px;
